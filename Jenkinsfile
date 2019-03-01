@@ -17,4 +17,11 @@ node {
       junit '**/target/surefire-reports/TEST-*.xml'
       archiveArtifacts 'target/*.jar'
    }
+   stage('Results') {
+       if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' sonar:sonar -Dsonar.host.url=http://ec2-18-222-40-7.us-east-2.compute.amazonaws.com:9000/"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
+      }
+   }
 }
