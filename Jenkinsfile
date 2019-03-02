@@ -11,7 +11,7 @@ node {
     write "quickfix"  
    }
    stage("sharedlib"){
-    sayHello "Pradeep"  
+    sayHello
    }
    stage('Preparation') { 
       git 'https://github.com/cicd-1/spring-app.git'
