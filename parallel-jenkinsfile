@@ -1,22 +1,35 @@
-
-node("maven-label"){
-
-parallel{
-stage("1"){
- echo "test1"
-}
-stage("2"){
- echo "test2"
-}
-stage("3"){
- echo "test3"
-}
-stage("4"){
- echo "test4"
-}
-stage("5"){
- echo "test5"
-}
-}
-
+pipeline {
+    agent none
+    stages {
+        stage('Run Tests') {
+            parallel {
+                stage('Test On Windows') {
+                    agent {
+                        label "windows"
+                    }
+                    steps {
+                        bat "run-tests.bat"
+                    }
+                    post {
+                        always {
+                            junit "**/TEST-*.xml"
+                        }
+                    }
+                }
+                stage('Test On Linux') {
+                    agent {
+                        label "linux"
+                    }
+                    steps {
+                        sh "run-tests.sh"
+                    }
+                    post {
+                        always {
+                            junit "**/TEST-*.xml"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
