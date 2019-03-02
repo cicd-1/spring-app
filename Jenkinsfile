@@ -1,11 +1,17 @@
+@Library(pipeline-library-demo)_
+
 def write( String name){
    echo "hello: $name"
    writeFile file: "/tmp/a.txt", text: "This file is useful, need to archive it. $name"
 }
 node {
    def mvnHome
+
    stage("ref lib"){
     write "quickfix"  
+   }
+   stage("sharedlib"){
+    sayHello "test"  
    }
    stage('Preparation') { 
       git 'https://github.com/cicd-1/spring-app.git'
