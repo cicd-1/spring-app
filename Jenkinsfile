@@ -1,4 +1,4 @@
-def write( string name){
+def write( String name){
    echo "hello: $name"
    writeFile file: "/tmp/a.txt", text: "This file is useful, need to archive it. $name"
 }
