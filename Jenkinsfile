@@ -1,4 +1,4 @@
-@Library(pipeline-library-demo)_
+@Library("pipeline-library-demo")_
 
 def write( String name){
    echo "hello: $name"
